@@ -1,60 +1,307 @@
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #9292ea;
-  }
-  .calendar {
-    width: 320px;
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  .calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  .calendar-header button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  .calendar-header button:hover {
-    background-color: #0056b3;
-  }
-  .calendar-header h2 {
-    margin: 0;
-  }
-  .calendar-days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-    text-align: center;
-  }
-  .day {
-    padding: 10px;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-  }
-  .day:hover {
-    background-color: #e9ecef;
-  }
-  .day.today {
-    background-color: #007bff;
-    color: white;
-  }
-  .day-name {
-    font-weight: bold;
-    color: #555;
-  }
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 10px;
+  background-color: #3b4e6d;
+}
+
+.calendar {
+  width: 510px;
+  height: 455px;
+  background: #f0f2f5;
+  border: 1px solid #ccc;
+  border-radius: 40px;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  position: relative;
+}
+
+.calendar-header h2 {
+  margin: 0;
+  flex-grow: 1;
+  text-align: left;
+  margin-right: 5px;
+}
+
+.calendar-header button {
+  background-color: #4b6e87;
+  color: white;
+  border: none;
+  border-radius: 13px;
+  cursor: pointer;
+  height: 38px;
+  width: 38px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.calendar-header button:hover {
+  background-color: #5a7d95;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 7px;
+  text-align: center;
+}
+
+.day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 30px;
+  width: 30px;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: #f9f9f9;
+}
+
+.day:hover {
+  background-color: #e9ecef;
+}
+
+.day.today {
+  background-color: #4b6e87;
+  color: white;
+  cursor: pointer;
+}
+
+.day.today:hover {
+  background-color: #5a7d95;
+}
+
+.day-name {
+  font-weight: bold;
+  color: #5f6a75;
+  text-align: center;
+}
+
+.day-name:nth-child(1),
+.day.sunday {
+  color: #e53946;
+}
+
+#year-name {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.year-selector {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.year-list {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.year-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+}
+
+.year-header button {
+  background-color: #4b6e87;
+  color: white;
+  border: none;
+  border-radius: 13px;
+  cursor: pointer;
+  height: 38px;
+  width: 38px;
+}
+
+.year-header button:hover {
+  background-color: #5a7d95;
+}
+
+.year {
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.year:hover {
+  background-color: #e0e4e9;
+}
+
+.year.highlight {
+  background-color: #4b6e87;
+  color: #f9f9f9;
+  font-weight: bold;
+}
+
+#year-header {
+  margin-bottom: 10px;
+  font-size: 25px;
+  text-align: center;
+  background-color: none;
+  color: #4b6e87;
+  font-weight: bold;
+  padding: 10px;
+  top: 20px;
+  width: 68%;
+}
+
+button {
+  background-color: #4b6e87;
+  color: #f9f9f9;
+  border: none;
+  border-radius: 13px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+button:hover {
+  background-color: #5a7d95;
+}
+
+#prev-year-btn,
+#next-year-btn {
+  display: inline-block;
+  padding: 10px;
+}
+
+#month-name {
+  cursor: pointer;
+}
+
+/* Month Selection Overlay for Dimming Effect */
+#month-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 10;
+}
+
+/* Center the month-selector overlay */
+#tot-m {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  background-color: white;
+  padding: 20px;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 20;
   
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+/* Center the month-grid (the grid of months) */
+.month-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+  background: white;
+  padding: 20px;
+  width: 86.5%;
+  max-width: 400px;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+#year-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  background: white;
+  padding: 10px;
+}
+
+.month {
+  padding: 10px;
+  text-align: center;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.month:hover {
+  background-color: #e0e4e9;
+}
+
+.month:active {
+  background-color: #b8c6d2;
+}
+
+/* Highlight for the currently selected (or present) month */
+.month.selected {
+  background-color: #4b6e87;
+  color: #fff;
+  font-weight: bold;
+}
+
+.tot-y {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 30px;
+}
+
+#current-year {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4b6e87;
+  margin-bottom: 0px;
+  text-align: right;
+  cursor: default;
+  width:85px;
+}
+
+.month-header {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  width: 85%;
+  padding: 20px;
+}

@@ -1,20 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Simple Calendar</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="calendar">
     <div class="calendar-header">
-      <button onclick="prevMonth()">&#8592;</button>
-      <h2 id="month-year"></h2>
-      <button onclick="nextMonth()">&#8594;</button>
+      <h2 id="month-year"><br>
+        <span id="month-name">January</span>
+        <span id="year-name" class="year-selectable">2025</span>
+      </h2>
+      <div class="button-group">
+        <button id="prev-btn"><b>&lt;</b></button>
+        <button id="next-btn"><b>&gt;</b></button>
+      </div>
     </div>
+    <br /><br />
     <div class="calendar-days" id="calendar-days"></div>
   </div>
+
+  <!-- Year Selection -->
+  <div class="year-selector" id="year-selector" style="display: none;">
+    <div class="tot-y">
+      <div class="year-header">
+        <button id="prev-year-btn"><b>&lt;</b></button>
+        <div id="year-header" class="year-range"></div>
+        <button id="next-year-btn"><b>&gt;</b></button>
+      </div>
+      <div class="year-list">
+        <div id="year-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Month Selection -->
+  <!-- The overlay dims the background when month selection is open -->
+  <div id="month-overlay"></div>
+  <div id="tot-m" style="display: none;">
+    <div class="month-header">
+      <button id="prev-month-year"><b>&lt;</b></button>
+      <div id="current-year"></div>
+      <span id="selected-year"></span>
+      <button id="next-month-year"><b>&gt;</b></button>
+    </div>
+    <div class="month-grid">
+      <div class="month" data-month="0">Jan</div>
+      <div class="month" data-month="1">Feb</div>
+      <div class="month" data-month="2">Mar</div>
+      <div class="month" data-month="3">Apr</div>
+      <div class="month" data-month="4">May</div>
+      <div class="month" data-month="5">Jun</div>
+      <div class="month" data-month="6">Jul</div>
+      <div class="month" data-month="7">Aug</div>
+      <div class="month" data-month="8">Sep</div>
+      <div class="month" data-month="9">Oct</div>
+      <div class="month" data-month="10">Nov</div>
+      <div class="month" data-month="11">Dec</div>
+    </div>
+  </div>
+  
   <script src="script.js"></script>
 </body>
 </html>
