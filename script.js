@@ -1,4 +1,46 @@
 document.addEventListener('DOMContentLoaded', () => {
+  /* --------------- State Management and View Switching --------------- */
+  const views = document.querySelectorAll('.view');
+  const defaultView = localStorage.getItem('defaultView') || 'view-month';
+
+  // Function to show a view and hide others
+  function switchView(viewId) {
+    views.forEach(view => {
+      view.style.display = (view.id === viewId) ? 'block' : 'none';
+    });
+    localStorage.setItem('defaultView', viewId);
+  }
+
+  // Initialize default view on page load
+  switchView(defaultView);
+
+  /* --------------- Sidebar Menu Functionality --------------- */
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const sidebarMenu = document.getElementById('sidebar-menu');
+
+  // Toggle sidebar display on hamburger button click
+  hamburgerBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); // Prevent event from bubbling to document
+    sidebarMenu.style.left = (sidebarMenu.style.left === '0px') ? '-260px' : '0px';
+  });
+
+  // Close sidebar if click happens outside of it
+  document.addEventListener('click', (e) => {
+    if (!sidebarMenu.contains(e.target) && e.target !== hamburgerBtn) {
+      sidebarMenu.style.left = '-260px';
+    }
+  });
+
+  // Add click events to each sidebar menu item
+  document.querySelectorAll('#sidebar-menu li').forEach(item => {
+    item.addEventListener('click', () => {
+      const viewId = item.getAttribute('data-view');
+      switchView(viewId);
+      sidebarMenu.style.left = '-260px';
+    });
+  });
+
+  /* --------------- Monthly Calendar Code --------------- */
   const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const calendarDays = document.getElementById('calendar-days');
   const monthYear = document.getElementById('month-year');
@@ -12,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const selectedYear = document.getElementById('selected-year');
   const totM = document.getElementById('tot-m'); // Month selection grid
   const monthOverlay = document.getElementById('month-overlay'); // Dimming overlay
-  const currentYear = document.getElementById('current-year');
+  const currentYearElem = document.getElementById('current-year');
   const prevMonthYear = document.getElementById('prev-month-year');
   const nextMonthYear = document.getElementById('next-month-year');
 
@@ -52,13 +94,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Attach click event to month name to open month selection with overlay
-    // (Reattach here because month name is re-rendered)
     document.getElementById('month-name').addEventListener('click', () => {
       totM.style.display = 'flex';
       monthOverlay.style.display = 'block';
-      // Update the header of month selection with the current year
-      currentYear.textContent = currentDate.getFullYear();
-      // Highlight the month corresponding to the current calendar month
+      currentYearElem.textContent = currentDate.getFullYear();
       document.querySelectorAll('.month').forEach(monthElem => {
         const m = parseInt(monthElem.dataset.month);
         if (m === currentDate.getMonth()) {
@@ -69,11 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Attach click events to year name to open year selection
+    // Attach click event to year name to open year selection
     document.getElementById('year-name').addEventListener('click', showYearSelector);
   }
 
-  // Attach click event listeners to each month only once
+  // Attach click event listeners to each month element (only once)
   document.querySelectorAll('.month').forEach(monthElem => {
     monthElem.addEventListener('click', (e) => {
       const selectedMonth = parseInt(e.target.dataset.month);
@@ -84,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Clicking the overlay hides the month selection
+  // Clicking the overlay hides month selection
   monthOverlay.addEventListener('click', () => {
     totM.style.display = 'none';
     monthOverlay.style.display = 'none';
@@ -155,13 +194,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
   prevMonthYear.addEventListener('click', () => {
     currentDate.setFullYear(currentDate.getFullYear() - 1);
-    currentYear.textContent = currentDate.getFullYear();
+    currentYearElem.textContent = currentDate.getFullYear();
   });
 
   nextMonthYear.addEventListener('click', () => {
     currentDate.setFullYear(currentDate.getFullYear() + 1);
-    currentYear.textContent = currentDate.getFullYear();
+    currentYearElem.textContent = currentDate.getFullYear();
   });
 
   renderCalendar();
+
+  /* --------------- Settings Functionality --------------- */
+  const darkThemeToggle = document.getElementById('dark-theme-toggle');
+  const brightnessInput = document.getElementById('brightness');
+  const colorThemeButtons = document.querySelectorAll('.color-theme');
+
+  if (localStorage.getItem('darkTheme') === 'true') {
+    document.body.classList.add('dark-theme');
+    darkThemeToggle.checked = true;
+  }
+  if (localStorage.getItem('brightness')) {
+    brightnessInput.value = localStorage.getItem('brightness');
+    document.body.style.filter = `brightness(${brightnessInput.value}%)`;
+  }
+
+  darkThemeToggle.addEventListener('change', (e) => {
+    if (e.target.checked) {
+      document.body.classList.add('dark-theme');
+      localStorage.setItem('darkTheme', 'true');
+    } else {
+      document.body.classList.remove('dark-theme');
+      localStorage.setItem('darkTheme', 'false');
+    }
+  });
+
+  brightnessInput.addEventListener('input', (e) => {
+    const brightnessValue = e.target.value;
+    document.body.style.filter = `brightness(${brightnessValue}%)`;
+    localStorage.setItem('brightness', brightnessValue);
+  });
+
+  colorThemeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const color = btn.getAttribute('data-color');
+      document.querySelector('.calendar').style.backgroundColor = color;
+      localStorage.setItem('calendarColor', color);
+    });
+  });
+
+  const savedColor = localStorage.getItem('calendarColor');
+  if (savedColor) {
+    document.querySelector('.calendar').style.backgroundColor = savedColor;
+  }
 });
