@@ -6,8 +6,58 @@ body {
   height: 100vh;
   margin: 10px;
   background-color: #3b4e6d;
+  transition: background-color 0.3s, color 0.3s;
 }
 
+/* Hamburger Button */
+#hamburger-btn {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  color: #fff;
+  z-index: 1001;
+  cursor: pointer;
+}
+
+/* Sidebar Menu */
+#sidebar-menu {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 250px;
+  height: 100%;
+  background-color: #4b6e87;
+  color: #f9f9f9;
+  transition: left 0.3s ease;
+  z-index: 1000;
+  padding-top: 50px;
+}
+
+#sidebar-menu ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#sidebar-menu li {
+  padding: 15px 20px;
+  cursor: pointer;
+  border-bottom: 1px solid #5a7d95;
+}
+
+#sidebar-menu li:hover {
+  background-color: #5a7d95;
+}
+
+/* Main Content Area */
+#main-content {
+  padding: 20px;
+  margin-top: 50px;
+}
+
+/* Calendar Styling (existing) */
 .calendar {
   width: 510px;
   height: 455px;
@@ -16,6 +66,7 @@ body {
   border-radius: 40px;
   padding: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: auto;
 }
 
 .calendar-header {
@@ -104,6 +155,7 @@ body {
   text-decoration: none;
 }
 
+/* Year Selector & Month Overlay (existing) */
 .year-selector {
   position: fixed;
   top: 0;
@@ -213,7 +265,7 @@ button:hover {
   z-index: 10;
 }
 
-/* Center the month-selector overlay */
+/* month selection container */
 #tot-m {
   position: fixed;
   top: 50%;
@@ -225,7 +277,6 @@ button:hover {
   border-radius: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 20;
-  
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -235,7 +286,7 @@ button:hover {
   margin: 0 auto;
 }
 
-/* Center the month-grid (the grid of months) */
+/* month grid */
 .month-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -275,7 +326,6 @@ button:hover {
   background-color: #b8c6d2;
 }
 
-/* Highlight for the currently selected (or present) month */
 .month.selected {
   background-color: #4b6e87;
   color: #fff;
@@ -304,4 +354,29 @@ button:hover {
   align-items: center;
   width: 85%;
   padding: 20px;
+}
+
+/* Settings Options */
+.setting-option {
+  margin-bottom: 20px;
+}
+
+/* Dark Theme Styles */
+.dark-theme {
+  background-color: #2e2e2e;
+  color: #ddd;
+}
+
+.dark-theme .calendar {
+  background-color: #3e3e3e;
+  border-color: #555;
+}
+
+.dark-theme button {
+  background-color: #555;
+  color: #ddd;
+}
+
+.dark-theme #sidebar-menu {
+  background-color: #555;
 }
