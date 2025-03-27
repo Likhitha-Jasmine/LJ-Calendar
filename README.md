@@ -29,7 +29,7 @@ To run the project locally, follow these steps:
    ```
 
 ## Demo
-[Screen recording or demo link here]
+[check out in my linked "Likhitha Jasmine Nurse]
 
 ## Contributing
 Feel free to contribute by creating a pull request or reporting issues!
