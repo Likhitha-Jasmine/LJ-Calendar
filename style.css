@@ -1,3 +1,51 @@
+/* Splash Screen Styles */
+#splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #3b4e6d; /* Matching your app background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000; /* Overlays all content */
+}
+
+#splash-screen h1 {
+  color: #fff; /* White color for the text */
+  font-size: 2em; /* Initial size */
+  animation: scaleUp 3s forwards;
+}
+
+/* Keyframes to scale the text up gradually */
+@keyframes scaleUp {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(7); /* Adjust this scale factor if needed */
+    opacity: 1;
+  }
+}
+
+/* Fade out animation for the splash screen */
+#splash-screen.fade-out {
+  animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* --- Existing styles below --- */
+
 body {
   font-family: Arial, sans-serif;
   display: flex;
@@ -341,7 +389,7 @@ button:hover {
 #current-year {
   font-size: 24px;
   font-weight: bold;
-  color: #4b6e87;
+  color: #4b6e6d;
   margin-bottom: 0px;
   text-align: right;
   cursor: default;

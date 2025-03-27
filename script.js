@@ -1,4 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Splash screen animation: wait for the scale animation to finish (3s)
+  // then add the fade-out class, and finally hide the splash screen.
+  setTimeout(() => {
+    const splash = document.getElementById('splash-screen');
+    splash.classList.add('fade-out');
+    setTimeout(() => {
+      splash.style.display = 'none';
+    }, 1000); // fade-out duration
+  }, 3000);
+
   /* --------------- State Management and View Switching --------------- */
   const views = document.querySelectorAll('.view');
   const defaultView = localStorage.getItem('defaultView') || 'view-month';
